@@ -1,3 +1,29 @@
 {
-  "cSpell.words": ["asuransi", "autoflush", "Balasan", "bpjs", "Ditambahkan", "dotenv", "fastapi", "Keuangan", "Klinis", "KURANG", "Penyebab", "sessionmaker", "sqlalchemy", "TADI", "uvicorn"]
+  "cSpell.words": [
+    "asuransi",
+    "autoflush",
+    "Balasan",
+    "bpjs",
+    "diagnosa",
+    "disetujui",
+    "Ditambahkan",
+    "ditanggung",
+    "ditolak",
+    "dotenv",
+    "dunia",
+    "fastapi",
+    "Keuangan",
+    "Klaim",
+    "Klinis",
+    "KURANG",
+    "menunggu",
+    "nyata",
+    "otomatis",
+    "Penyebab",
+    "sessionmaker",
+    "sqlalchemy",
+    "TADI",
+    "uvicorn",
+    "verifikasi"
+  ]
 }
