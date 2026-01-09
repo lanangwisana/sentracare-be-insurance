@@ -10,13 +10,13 @@ from schemas import ClaimSubmission, ClaimResponse
 
 app = FastAPI(title="Sentracare Insurance Bridge Service")
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 Base.metadata.create_all(bind=engine)
 
@@ -27,11 +27,13 @@ def get_db():
     finally:
         db.close()
 
-@app.post("/insurance/claims", response_model=ClaimResponse, tags=["claims"])
+@app.post(
+    "/insurance/claims",
+    tags=["Claims"],
+    summary="Submit a new insurance claim",
+    description="Endpoint to submit a new insurance claim for processing.", 
+    response_model=ClaimResponse)
 def submit_claim(data: ClaimSubmission, db: Session = Depends(get_db)):
-    
-    # --- LOGIC SIMULASI BPJS/ASURANSI ---
-    # Di dunia nyata, ini akan connect ke server BPJS V-Claim
     
     status = ClaimStatus.APPROVED
     msg = "Klaim berhasil disetujui otomatis."
@@ -59,6 +61,11 @@ def submit_claim(data: ClaimSubmission, db: Session = Depends(get_db)):
     db.refresh(new_claim)
     return new_claim
 
-@app.get("/insurance/claims", response_model=List[ClaimResponse], tags=["claims"])
+@app.get(
+    "/insurance/claims", 
+    tags=["Claims"],
+    summary="Get all insurance claims",
+    description="Endpoint to retrieve all submitted insurance claims.",
+    response_model=List[ClaimResponse])
 def get_all_claims(db: Session = Depends(get_db)):
     return db.query(InsuranceClaim).order_by(InsuranceClaim.created_at.desc()).all()
